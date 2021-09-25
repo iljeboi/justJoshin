@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import HighScore from "./HighScore";
 
 class Application extends Component {
     constructor(props){
@@ -34,18 +35,22 @@ class Application extends Component {
         
     }
 
+    resetCuont = (e) => {
+        this.setState({
+            count: 0,
+            overTen: false
+        })
+    }
+
     render(){
-        let {count} = this.state;
-
         return(
-
             <div>
-                <div>
-                    {(this.state.overTen) ? <h1>You Did It</h1> : this.chokeCheck()}
-                    <h1>You Clicked for a Total of {this.state.count} points</h1>
-                    <button onClick={() => this.handleClick()} >Click Me</button>
-                    <button onClick={() => this.handleOtherClick()}>Don't Click Me!</button>
-                </div>
+                <h1>You Clicked for a Total of {this.state.count} points</h1>
+                <button onClick={() => this.handleClick()}>Sup</button>
+                <HighScore 
+                    overTen={this.state.overTen}
+                    onReset={(e) => this.resetCuont(e)}
+                />
             </div>
         )
     }
